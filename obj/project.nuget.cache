@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "n/LtaihcUKmqNgVQtNN5SI9TF5zdxIPEAwJbs17eZlfhAbAoTZ0KNPmU9fudVWNeo/UV8813GbNeIKiSO8TX+g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lubim\\OneDrive\\Рабочий стол\\Splash\\Splash.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lubim\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x86\\6.0.15\\microsoft.netcore.app.runtime.win-x86.6.0.15.nupkg.sha512",
+    "C:\\Users\\lubim\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x86\\6.0.15\\microsoft.windowsdesktop.app.runtime.win-x86.6.0.15.nupkg.sha512",
+    "C:\\Users\\lubim\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x86\\6.0.15\\microsoft.aspnetcore.app.runtime.win-x86.6.0.15.nupkg.sha512",
+    "C:\\Users\\lubim\\.nuget\\packages\\microsoft.netcore.app.crossgen2.win-x64\\6.0.15\\microsoft.netcore.app.crossgen2.win-x64.6.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}
