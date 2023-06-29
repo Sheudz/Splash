@@ -11,17 +11,13 @@ namespace Splash
     internal class Utilities
     {
         internal static void SplashScreen()
-        {
-            Console.Write("\n");
-            Console.WriteLine("#######################################################################################################");
-            Console.WriteLine("#  _####            _#######=_       ##                     ####                _####         ##      #");
-            Console.WriteLine("# ##-   #           #        #       ##                    ##  ##              ##-   #        ##      #");
-            Console.WriteLine("# ##                #        #       ##                   ##    ##             ##             #####   #");
-            Console.WriteLine("#   ###=_           #========J       ##                  ##      ##             ###=_         ######  #");
-            Console.WriteLine("#       ##          ##               ##                 ##========##                ##        ##   ## #");
-            Console.WriteLine("#       ##          #                ###               ##          ##               ##        ##   ## #");
-            Console.WriteLine("#  ######           #                #######          ##            ##         ######         ##   ## #");
-            Console.WriteLine("####################################################################################################### \n");
+        {;
+            Console.WriteLine("███████╗██████╗ ██╗      █████╗ ███████╗██╗  ██╗ ");
+            Console.WriteLine("██╔════╝██╔══██╗██║     ██╔══██╗██╔════╝██║  ██║");
+            Console.WriteLine("███████╗██████╔╝██║     ███████║███████╗███████║");
+            Console.WriteLine("╚════██║██╔═══╝ ██║     ██╔══██║╚════██║██╔══██║");
+            Console.WriteLine("███████║██║     ███████╗██║  ██║███████║██║  ██║");
+            Console.WriteLine("╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝\n");
         }
 
         internal static void SuspendProcess(int pid)
