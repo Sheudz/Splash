@@ -5,4 +5,5 @@
 
  One of the main advantages of "Splash" is its speed due to the lack of a graphical user interface. This allows for fast and accurate process management, especially in  cases where every millisecond counts.
 
- ![image](https://github.com/Sheudz/Splash/assets/77610032/2539a854-bdba-47f5-bf7a-eaf015a0aab1)
+![image](https://github.com/Sheudz/Splash/assets/77610032/b732bfb8-adf9-449d-815c-8d31e051a538)
+
