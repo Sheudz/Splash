@@ -29,10 +29,10 @@ class Program
         {
             Console.Write(">$>: ");
             string? input = Console.ReadLine();
-            string?[] commands = input.Split("&");
+            string?[] commands = input?.Split("&") ?? Array.Empty<string>();
             foreach (string? commandRaw in commands)
             {
-                string?[] commandParts = commandRaw.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                string[] commandParts = commandRaw?.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) ?? Array.Empty<string>();
                 string? command = null;
                 string? argument1 = null;
                 string? argument2 = null;
@@ -43,13 +43,31 @@ class Program
                     argument2 = commandParts[2];
                 }
                 catch { }
-                if (!_commandMap.TryGetValue(command, out var commandMethod))
+                if (!_commandMap.TryGetValue(command ?? "", out var commandMethod))
                 {
                     Console.WriteLine(command + " is an unknown command, if you need help type 'help' \n");
                 }
                 else
                 {
-                    commandMethod(argument1, argument2);
+                    if (commandMethod != null)
+                    {
+                        if (argument1 != null && argument2 != null)
+                        {
+                            commandMethod.Invoke(argument1, argument2);
+                        }
+                        else if (argument1 != null)
+                        {
+                            commandMethod.Invoke(argument1, string.Empty);
+                        }
+                        else if (argument2 != null)
+                        {
+                            commandMethod.Invoke(string.Empty, argument2);
+                        }
+                        else
+                        {
+                            commandMethod.Invoke(string.Empty, string.Empty);
+                        }
+                    }
                 }
             }
         }
@@ -105,7 +123,10 @@ class Program
             {
                 try
                 {
-                    Console.WriteLine($"{process.Id}:::{process.ProcessName} > {process.MainModule.FileName}");
+                    if (process != null && process.MainModule != null)
+                    {
+                        Console.WriteLine($"{process.Id}:::{process.ProcessName} > {process.MainModule.FileName}");
+                    }
                 }
                 catch (Exception ex)
                 {
