@@ -15,7 +15,8 @@ class Program
         ["suspend"] = SuspendProcess,
         ["unsuspend"] = UnsuspendProcess,
         ["ps"] = ListProcesses,
-        ["find"] = FindProcess
+        ["find"] = FindProcess,
+        ["getpath"] = GetPath
     };
 
     
@@ -26,7 +27,7 @@ class Program
         Utilities.SplashScreen();
         while (true)
         {
-            Console.Write(">:>$>: ");
+            Console.Write(">$>: ");
             string? input = Console.ReadLine();
             string?[] commands = input.Split("&");
             foreach (string? commandRaw in commands)
@@ -94,6 +95,26 @@ class Program
         Console.Write("\n");
     }
 
+    private static void GetPath(string argument1, string __)
+    {
+        Process[] processes = Process.GetProcesses();
+
+        foreach (Process process in processes)
+        {
+            if (process.ProcessName == argument1 || process.Id.ToString() == argument1)
+            {
+                try
+                {
+                    Console.WriteLine($"{process.Id}:::{process.ProcessName} > {process.MainModule.FileName}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Failed to access path for process: {process.Id}:::{process.ProcessName} >> {ex.Message}");
+                    Console.WriteLine();
+                }
+            }
+        }
+    }
 
     private static void ClearConsole(string _, string __)
     {
@@ -230,11 +251,12 @@ class Program
     private static void DisplayHelpMessage(string argument1, string argument2)
     {
         Console.WriteLine("help - show help");
-        Console.WriteLine("clear or cls - cleans the console");
-        Console.WriteLine("kill <process.name> or <process.pid>- kill process");
-        Console.WriteLine("suspend <process.name> or <process.pid> - suspend process");
-        Console.WriteLine("unsuspend <process.name> or <process.pid> - unsuspend process");
-        Console.WriteLine("ps - write process list");
-        Console.WriteLine("find <process.name> or <process.pid> - find process by pid or name");
+        Console.WriteLine("clear or cls - clear the console");
+        Console.WriteLine("kill <process.name> or <process.id> - kill a process");
+        Console.WriteLine("suspend <process.name> or <process.id> - suspend a process");
+        Console.WriteLine("unsuspend <process.name> or <process.id> - unsuspend a process");
+        Console.WriteLine("ps - write the process list");
+        Console.WriteLine("find <process.name> or <process.id> - find a process by its PID or name");
+        Console.WriteLine("getpath <process.name> or <process.id> - output the file path");
     }
 }
