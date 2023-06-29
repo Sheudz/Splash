@@ -43,29 +43,32 @@ class Program
                     argument2 = commandParts[2];
                 }
                 catch { }
-                if (!_commandMap.TryGetValue(command ?? "", out var commandMethod))
+                if (!string.IsNullOrEmpty(command))
                 {
-                    Console.WriteLine(command + " is an unknown command, if you need help type 'help' \n");
-                }
-                else
-                {
-                    if (commandMethod != null)
+                    if (!_commandMap.TryGetValue(command, out var commandMethod))
                     {
-                        if (argument1 != null && argument2 != null)
+                        Console.WriteLine(command + " is an unknown command, if you need help type 'help' \n");
+                    }
+                    else
+                    {
+                        if (commandMethod != null)
                         {
-                            commandMethod.Invoke(argument1, argument2);
-                        }
-                        else if (argument1 != null)
-                        {
-                            commandMethod.Invoke(argument1, string.Empty);
-                        }
-                        else if (argument2 != null)
-                        {
-                            commandMethod.Invoke(string.Empty, argument2);
-                        }
-                        else
-                        {
-                            commandMethod.Invoke(string.Empty, string.Empty);
+                            if (argument1 != null && argument2 != null)
+                            {
+                                commandMethod.Invoke(argument1, argument2);
+                            }
+                            else if (argument1 != null)
+                            {
+                                commandMethod.Invoke(argument1, string.Empty);
+                            }
+                            else if (argument2 != null)
+                            {
+                                commandMethod.Invoke(string.Empty, argument2);
+                            }
+                            else
+                            {
+                                commandMethod.Invoke(string.Empty, string.Empty);
+                            }
                         }
                     }
                 }
@@ -131,7 +134,6 @@ class Program
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Failed to access path for process: {process.Id}:::{process.ProcessName} >> {ex.Message}");
-                    Console.WriteLine();
                 }
             }
         }
@@ -179,16 +181,24 @@ class Program
             bool fon = false;
             foreach (var proc in Process.GetProcesses())
             {
-                if (proc.Id.ToString() == argument1)
+                try
                 {
-                    Utilities.ResumeProcess(Int32.Parse(argument1));
-                    Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " unsuspended");
-                    fon = true;
+                    if (proc.Id.ToString() == argument1)
+                    {
+                        Utilities.ResumeProcess(Int32.Parse(argument1));
+                        Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " unsuspended");
+                        fon = true;
+                    }
+                    if (proc.ProcessName == argument1)
+                    {
+                        Utilities.ResumeProcess(proc.Id);
+                        Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " unsuspended");
+                        fon = true;
+                    }
                 }
-                if (proc.ProcessName == argument1)
+                catch (Exception ex)
                 {
-                    Utilities.ResumeProcess(proc.Id);
-                    Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " unsuspended");
+                    Console.WriteLine($"Failed to unsuspend procces >> {ex.Message}");
                     fon = true;
                 }
             }
@@ -211,16 +221,24 @@ class Program
             bool fon = false;
             foreach (var proc in Process.GetProcesses())
             {
-                if (proc.Id.ToString() == argument1)
+                try
                 {
-                    Utilities.SuspendProcess(Int32.Parse(argument1));
-                    Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " suspended");
-                    fon = true;
+                    if (proc.Id.ToString() == argument1)
+                    {
+                        Utilities.SuspendProcess(Int32.Parse(argument1));
+                        Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " suspended");
+                        fon = true;
+                    }
+                    if (proc.ProcessName == argument1)
+                    {
+                        Utilities.SuspendProcess(proc.Id);
+                        Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " suspended");
+                        fon = true;
+                    }
                 }
-                if (proc.ProcessName == argument1)
+                catch (Exception ex)
                 {
-                    Utilities.SuspendProcess(proc.Id);
-                    Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " suspended");
+                    Console.WriteLine($"Failed to suspend procces >> {ex.Message}");
                     fon = true;
                 }
             }
@@ -244,16 +262,24 @@ class Program
             bool fon = false;
             foreach (var proc in Process.GetProcesses())
             {
-                if (proc.Id.ToString() == argument1)
+                try
                 {
-                    proc.Kill();
-                    Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " killed");
-                    fon = true;
+                    if (proc.Id.ToString() == argument1)
+                    {
+                        proc.Kill();
+                        Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " killed");
+                        fon = true;
+                    }
+                    if (proc.ProcessName == argument1)
+                    {
+                        proc.Kill();
+                        Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " killed");
+                        fon = true;
+                    }
                 }
-                if (proc.ProcessName == argument1)
+                catch(Exception ex)
                 {
-                    proc.Kill();
-                    Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " killed");
+                    Console.WriteLine($"Failed to kill process >> {ex.Message}");
                     fon = true;
                 }
             }
