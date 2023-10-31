@@ -178,7 +178,7 @@ class Program
     {
         if (argument1 != null)
         {
-            bool fon = false;
+            bool isFinded = false;
             foreach (var proc in Process.GetProcesses())
             {
                 try
@@ -187,22 +187,22 @@ class Program
                     {
                         Utilities.ResumeProcess(Int32.Parse(argument1));
                         Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " unsuspended");
-                        fon = true;
+                        isFinded = true;
                     }
                     if (proc.ProcessName == argument1)
                     {
                         Utilities.ResumeProcess(proc.Id);
                         Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " unsuspended");
-                        fon = true;
+                        isFinded = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to unsuspend procces >> {ex.Message}");
-                    fon = true;
+                    Console.WriteLine($"Failed to unsuspend process >> {ex.Message}");
+                    isFinded = true;
                 }
             }
-            if (fon == false)
+            if (isFinded == false)
             {
                 Console.WriteLine(argument1 + " not found");
             }
@@ -210,7 +210,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("You didn't pass an argument, use the `unsuspend` command like this: `unsuspend <process.name>` or `unsuspend <process.pid> \n");
+            Console.WriteLine("You didn't pass an argument, use the `unsuspend` command like this: `unsuspend <process.name>` or `unsuspend <process.pid>` \n");
         }
     }
 
@@ -218,7 +218,7 @@ class Program
     {
         if (argument1 != null)
         {
-            bool fon = false;
+            bool isFinded = false;
             foreach (var proc in Process.GetProcesses())
             {
                 try
@@ -227,22 +227,22 @@ class Program
                     {
                         Utilities.SuspendProcess(Int32.Parse(argument1));
                         Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " suspended");
-                        fon = true;
+                        isFinded = true;
                     }
                     if (proc.ProcessName == argument1)
                     {
                         Utilities.SuspendProcess(proc.Id);
                         Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " suspended");
-                        fon = true;
+                        isFinded = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Failed to suspend procces >> {ex.Message}");
-                    fon = true;
+                    Console.WriteLine($"Failed to suspend process >> {ex.Message}");
+                    isFinded = true;
                 }
             }
-            if (fon == false)
+            if (isFinded == false)
             {
                 Console.WriteLine(argument1 + " not found");
             }
@@ -251,7 +251,7 @@ class Program
 
         else
         {
-            Console.WriteLine("You didn't pass an argument, use the `suspend` command like this: `suspend <process.name>` or `suspend <process.pid>\n");
+            Console.WriteLine("You didn't pass an argument, use the `suspend` command like this: `suspend <process.name>` or `suspend <process.pid>` \n");
         }
     }
 
@@ -259,7 +259,7 @@ class Program
     {
         if (argument1 != null)
         {
-            bool fon = false;
+            bool isFinded = false;
             foreach (var proc in Process.GetProcesses())
             {
                 try
@@ -268,22 +268,22 @@ class Program
                     {
                         proc.Kill();
                         Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " killed");
-                        fon = true;
+                        isFinded = true;
                     }
                     if (proc.ProcessName == argument1)
                     {
                         proc.Kill();
                         Console.WriteLine(proc.Id.ToString() + ":::" + proc.ProcessName + " killed");
-                        fon = true;
+                        isFinded = true;
                     }
                 }
                 catch(Exception ex)
                 {
                     Console.WriteLine($"Failed to kill process >> {ex.Message}");
-                    fon = true;
+                    isFinded = true;
                 }
             }
-            if (fon == false)
+            if (isFinded == false)
             {
                 Console.WriteLine(argument1 + " not found");
             }
@@ -291,7 +291,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("You didn't pass an argument, use the `kill` command like this: `kill <process.name>` or `kill <process.pid>\n");
+            Console.WriteLine("You didn't pass an argument, use the `kill` command like this: `kill <process.name>` or `kill <process.pid>` \n");
         }
     }
 
